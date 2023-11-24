@@ -133,8 +133,45 @@ func main() {
 		}
 
 		var result string
+		var mod int8 = 0
+
+		switch {
+		case firstValue >= 90:
+			{
+				if firstValue < 100 {
+					result += "X"
+					firstValue += 10
+				}
+				result += "C"
+				firstValue -= 100
+			}
+		case firstValue >= 40:
+			{
+				if firstValue < 50 {
+					result += "X"
+					mod += 10
+				}
+				result += "L"
+				if firstValue > 50 {
+					for i := firstValue; i < 80; i += 10 {
+						result += "X"
+						mod -= 10
+					}
+				}
+				firstValue -= 50 + mod
+			}
+		}
 
 		for firstValue > 10 {
+
+			if firstValue == 100 {
+				result += "C"
+				break
+			}
+			if firstValue >= 50 {
+
+			}
+
 			firstValue -= 10
 			result += "X"
 		}
