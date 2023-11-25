@@ -8,6 +8,23 @@ import (
 	"strings"
 )
 
+func toRoman(number int) string {
+	nums := [9]int{100, 90, 50, 40, 10, 9, 5, 4, 1}
+	symb := [9]string{"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	var result string = ""
+
+	for number > 0 {
+		for key, _ := range nums {
+			if number >= nums[key] {
+				result += symb[key]
+				number -= nums[key]
+				break
+			}
+		}
+	}
+	return result
+}
+
 func main() {
 
 	//make map
@@ -132,52 +149,7 @@ func main() {
 			return
 		}
 
-		var result string
-		var mod int8 = 0
-
-		switch {
-		case firstValue >= 90:
-			{
-				if firstValue < 100 {
-					result += "X"
-					firstValue += 10
-				}
-				result += "C"
-				firstValue -= 100
-			}
-		case firstValue >= 40:
-			{
-				if firstValue < 50 {
-					result += "X"
-					mod += 10
-				}
-				result += "L"
-				if firstValue > 50 {
-					for i := firstValue; i < 80; i += 10 {
-						result += "X"
-						mod -= 10
-					}
-				}
-				firstValue -= 50 + mod
-			}
-		}
-
-		for firstValue > 10 {
-
-			if firstValue == 100 {
-				result += "C"
-				break
-			}
-			if firstValue >= 50 {
-
-			}
-
-			firstValue -= 10
-			result += "X"
-		}
-		result += toRomanNum[firstValue]
-
-		fmt.Println(result)
+		fmt.Println(toRoman(int(firstValue)))
 	} else {
 		println(firstValue)
 	}
